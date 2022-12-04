@@ -31,12 +31,11 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     })
     .catch(err => console.error(err))
 
-// function getCurrentTime() {
-//     const date = new Date()
-//     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
-// }
-
-// setInterval(getCurrentTime, 1000)
+function getCurrentTime() {
+    const date = new Date()
+    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {hour: "2-digit", minute: "2-digit", second: "2-digit"})
+}
+setInterval(getCurrentTime, 1000)
 
 navigator.geolocation.getCurrentPosition(position => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=19.075&lon=72.877&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`)
