@@ -1,62 +1,64 @@
-fetch("https://api.unsplash.com//photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature")
-    .then(res => res.json())
-    .then(data => {
-        document.body.style.backgroundImage = `url(${data.urls.full})`
-		document.getElementById("author").textContent = `By: ${data.user.name}`
-    })
-    .catch(err => {
-        // Use a default background image/author
-        document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080
-)`
-		document.getElementById("author").textContent = `By: Dodi Achmad`
-    })
+document.querySelector("button").addEventListener("click", getWeather)
 
-fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
-    .then(res => {
-        if (!res.ok) {
-            throw Error("Something went wrong")
-        }
-        return res.json()
-    })
-    .then(data => {
-        document.getElementById("crypto-top").innerHTML = `
-            <img src=${data.image.small} />
-            <span>${data.name}</span>
-        `
-        document.getElementById("crypto").innerHTML += `
-            <p>🎯: $${data.market_data.current_price.usd}</p>
-            <p>👆: $${data.market_data.high_24h.usd}</p>
-            <p>👇: $${data.market_data.low_24h.usd}</p>
-        `
-    })
-    .catch(err => console.error(err))
+fetch(
+   "https://api.unsplash.coom/photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature"
+)
+   .then((resp) => resp.json())
+   .then((data) => {
+      document.body.style.backgroundImage = `url(${data.urls.full})`;
+      document.getElementById(
+         "author"
+      ).innerHTML = `By: <a href="${data.user.links.html}" target="_blank">${data.user.username}</a>`;
+   })
+   .catch((err) => {
+      document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080
+)`;
+      document.getElementById(
+         "author"
+      ).innerHTML = `By: <a href="https://unsplash.com/@dodiachmad" target="_blank">dodiachmad</a>`;
+   });
+
+function getWeather() {
+   const location = document.getElementById("search-input").value;
+   fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${location.replace(" ", "+")}&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`
+   )
+    .then(resp => resp.json())
+    .then(data => console.log(data))
+}
+
+function getQuote() {
+   fetch("https://api.quotable.io/random")
+      .then((resp) => resp.json())
+      .then((data) => {
+         document.getElementById("quote").innerText = `${data.content}`;
+      })
+      .catch((err) => console.error(err));
+}
+
+function getCryptoData() {
+   fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Cethereum%2Clitecoin&vs_currencies=usd"
+   )
+      .then((resp) => resp.json())
+      .then((data) => {
+         document.getElementById("crypto-section").innerHTML += `
+            <ul>
+                <li><p class="btc">Bitcoin: $${data.bitcoin.usd}</p></li>
+                <li><p class="eth">Ethereum: $${data.ethereum.usd}</p></li>
+                <li><p class="ltc">Litecoin: $${data.litecoin.usd}</p></li>
+            </ul>`;
+      });
+}
 
 function getCurrentTime() {
-    const date = new Date()
-    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {hour: "2-digit", minute: "2-digit", second: "2-digit"})
+   const date = new Date();
+   document.getElementById("timer").textContent = date.toLocaleTimeString(
+      "en-us",
+      { hour: "2-digit", minute: "2-digit", second: "2-digit" }
+   );
 }
-setInterval(getCurrentTime, 1000)
 
-navigator.geolocation.getCurrentPosition(position => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=19.075&lon=72.877&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`)
-        .then(res => {
-            if (!res.ok) {
-                throw Error("Weather data not available")
-            }
-            return res.json()
-        })
-        .then(data => {
-            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-            document.getElementById("weather").innerHTML = `
-                <img src=${iconUrl} />
-                <p class="weather-temp">${Math.round(data.main.temp)}º</p>
-                <p class="weather-city">${data.name}</p>
-            `
-        })
-        .catch(err => console.error(err))
-});
-
-/**
- * Challenge: Try to lay out the weather similar to how
- * Momentum does it.
- */
+setInterval(getCurrentTime, 1000);
+getCryptoData();
+getQuote();
