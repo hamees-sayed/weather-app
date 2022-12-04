@@ -1,7 +1,7 @@
-fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
+fetch("https://api.unsplash.com//photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature")
     .then(res => res.json())
     .then(data => {
-        document.body.style.backgroundImage = `url(${data.urls.regular})`
+        document.body.style.backgroundImage = `url(${data.urls.full})`
 		document.getElementById("author").textContent = `By: ${data.user.name}`
     })
     .catch(err => {
@@ -39,7 +39,7 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
 // setInterval(getCurrentTime, 1000)
 
 navigator.geolocation.getCurrentPosition(position => {
-    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=imperial`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=19.075&lon=72.877&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`)
         .then(res => {
             if (!res.ok) {
                 throw Error("Weather data not available")
