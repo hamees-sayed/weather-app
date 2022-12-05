@@ -11,6 +11,7 @@ fetch(
       ).innerHTML = `By: <a href="${data.user.links.html}" target="_blank">${data.user.username}</a>`;
    })
    .catch((err) => {
+      console.log("Cannot send anymore requests. Try again later. (Refreshes every hour)")
       document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080
 )`;
       document.getElementById(
