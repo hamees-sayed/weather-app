@@ -35,10 +35,22 @@ function getWeather() {
             </div>
             <p class="temp">${Math.round(data.main.temp)}°C | ${Math.round(data.main.temp*(9/5)+32)}°F</p>
             <p class="extras">Humidity: ${data.main.humidity}% <img src="images/humidity.png" /></p>
-            <p class="extras">Wind: ${data.wind.speed}m/s <img src="images/wind.png" /></p>
-            <p class="extras">Visibility: ${data.main.visibility}km <img src="images/visible.png"/></p>
+            <p class="extras">Wind: ${Math.round(data.wind.speed*3.6)} km/h <img src="images/wind.png" /></p>
+            <p class="extras">Visibility: ${data.visibility/1000} km <img src="images/visible.png"/></p>
             <p class="extras">Weather: ${data.weather[0].main} <img src="images/smoke.png" /></p>`;
-      });
+      })
+      .catch(err => {
+         console.log(err)
+         document.getElementById("weather-section").innerHTML = `
+      <div class="head">
+               <p class="head">Mumbai <img class="main-icon" src="images/weather-icon.png"></p>
+            </div>
+            <p class="temp">28°C | 82°F</p>
+            <p class="extras">Humidity: 60% <img src="images/humidity.png" /></p>
+            <p class="extras">Wind: 17 km/h <img src="images/wind.png" /></p>
+            <p class="extras">Visibility: 2.5 km <img src="images/visible.png"/></p>
+            <p class="extras">Weather: Smoke <img src="images/smoke.png" /></p>`;
+      })
 }
 
 function getQuote() {
@@ -47,7 +59,10 @@ function getQuote() {
       .then((data) => {
          document.getElementById("quote").innerText = `${data.content}`;
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+         console.log(err)
+         document.getElementById("quote").innerText = `The way to get started is to quit talking and begin doing.`
+      });
 }
 
 function getCryptoData() {
@@ -62,7 +77,16 @@ function getCryptoData() {
                 <li><p class="eth">Ethereum: $${data.ethereum.usd}</p></li>
                 <li><p class="ltc">Litecoin: $${data.litecoin.usd}</p></li>
             </ul>`;
-      });
+      })
+      .catch(err => {
+         console.log(err)
+         document.getElementById("crypto-section").innerHTML += `
+            <ul>
+                <li><p class="btc">Bitcoin: $17500</p></li>
+                <li><p class="eth">Ethereum: $1300</p></li>
+                <li><p class="ltc">Litecoin: $85</p></li>
+            </ul>`;
+      })
 }
 
 function getCurrentTime() {
