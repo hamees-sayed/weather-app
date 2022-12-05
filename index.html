@@ -6,7 +6,8 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="stylesheet" href="index.css" />
       <script src="index.js" defer></script>
-      <title>Document</title>
+      <link rel="icon" href="images/weather-icon.png">
+      <title>Weather App</title>
    </head>
    <body>
       <header>
@@ -19,20 +20,14 @@
          <div id="search">
             <input
                type="text"
+               value="Mumbai"
                placeholder="Search weather location..."
                id="search-input"
                required
             />
             <button for="search-input" type="submit">🔎</button>
          </div>
-         <div id="weather-section">
-            <p>Weather in Mumbai</p>
-            <p>haze</p>
-            <p>humidity</p>
-            <p>windspeed</p>
-            <p>visibility</p>
-            <p>temp</p>
-         </div>
+         <div id="weather-section"></div>
       </header>
       <main id="time">
          <h1 id="timer"></h1>

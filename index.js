@@ -1,7 +1,7 @@
-document.querySelector("button").addEventListener("click", getWeather)
+document.querySelector("button").addEventListener("click", getWeather);
 
 fetch(
-   "https://api.unsplash.coom/photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature"
+   "https://api.unsplash.com/photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature"
 )
    .then((resp) => resp.json())
    .then((data) => {
@@ -21,10 +21,24 @@ fetch(
 function getWeather() {
    const location = document.getElementById("search-input").value;
    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location.replace(" ", "+")}&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`
+      `https://api.openweathermap.org/data/2.5/weather?q=${location.replace(
+         " ",
+         "+"
+      )}&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`
    )
-    .then(resp => resp.json())
-    .then(data => console.log(data))
+      .then((resp) => resp.json())
+      .then((data) => {
+         const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+         document.getElementById("weather-section").innerHTML = `
+      <div class="head">
+               <p class="head">${location} <img class="main-icon" src="${iconUrl}"></p>
+            </div>
+            <p class="temp">${Math.round(data.main.temp)}°C | ${Math.round(data.main.temp*(9/5)+32)}°F</p>
+            <p class="extras">Humidity: ${data.main.humidity}% <img src="images/humidity.png" /></p>
+            <p class="extras">Wind: ${data.wind.speed}m/s <img src="images/wind.png" /></p>
+            <p class="extras">Visibility: ${data.main.visibility}km <img src="images/visible.png"/></p>
+            <p class="extras">Weather: ${data.weather[0].main} <img src="images/smoke.png" /></p>`;
+      });
 }
 
 function getQuote() {
@@ -61,4 +75,5 @@ function getCurrentTime() {
 
 setInterval(getCurrentTime, 1000);
 getCryptoData();
+getWeather();
 getQuote();

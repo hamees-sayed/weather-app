@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&family=Solway:wght@800&display=swap");
 
 body {
    padding: 0;
@@ -14,6 +14,7 @@ body {
 header {
    display: flex;
    justify-content: space-between;
+   align-items: flex-start;
    margin: 50px;
 }
 
@@ -26,8 +27,10 @@ button {
    padding: 6px 12px;
    font-size: 18px;
    background-color: white;
-   border: 1px solid;
+   border: none;
    border-radius: 6px;
+   border: 1px solid rgb(42, 41, 41);
+   box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 button {
@@ -53,7 +56,7 @@ main {
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   margin: 150px;
+   margin: 80px;
 }
 
 footer {
@@ -99,6 +102,7 @@ h3 {
    padding: 30px 25px;
    border: 1px solid rgb(42, 41, 41);
    border-radius: 6px;
+   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 }
 
 img {
@@ -131,4 +135,44 @@ p {
 
 .ltc {
    color: rgb(41, 156, 3);
+}
+
+#weather-section {
+   background-color: white;
+   padding: 30px 25px;
+   border: 1px solid rgb(42, 41, 41);
+   border-radius: 6px;
+   text-align: center;
+   box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+}
+
+.head {
+   text-align: center;
+   font-weight: 700;
+   font-family: "Solway", serif;
+   font-size: 24px;
+   text-transform: uppercase;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.main-icon {
+   width: 50px;
+}
+
+.temp {
+   font-size: 30px;
+   margin-bottom: 12px;
+   margin-left: 30px;  
+}
+
+.extras {
+   font-size: 20px;
+   margin-bottom: 8px;
+}
+
+#weather-section > p {
+   display: flex;
+   justify-content: flex-start;
 }
