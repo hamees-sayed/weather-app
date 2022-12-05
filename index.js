@@ -1,25 +1,22 @@
 document.querySelector("button").addEventListener("click", getWeather);
 
-fetch(
-   "https://api.unsplash.com/photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature"
-)
-   .then((resp) => resp.json())
-   .then((data) => {
-      document.body.style.backgroundImage = `url(${data.urls.full})`;
-      document.getElementById(
-         "author"
-      ).innerHTML = `By: <a href="${data.user.links.html}" target="_blank">${data.user.username}</a>`;
-   })
-   .catch((err) => {
-      console.log("Cannot send anymore requests. Try again later. (Refreshes every hour)")
-      document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080
-)`;
-      document.getElementById(
-         "author"
-      ).innerHTML = `By: <a href="https://unsplash.com/@dodiachmad" target="_blank">dodiachmad</a>`;
-   });
+function getBackground() {
+   fetch("https://api.unsplash.com/photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature")
+      .then((resp) => resp.json())
+      .then((data) => {
+         document.body.style.backgroundImage = `url(${data.urls.full})`;
+         document.getElementById("author").innerHTML = `By: <a href="${data.user.links.html}" target="_blank">${data.user.username}</a>`;
+      })
+      .catch((err) => {
+         console.log(err + " :Cannot send anymore requests. Try again later. (Refreshes every hour)")
+         document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080)`;
+         document.getElementById("author").innerHTML = `By: <a href="https://unsplash.com/@dodiachmad" target="_blank">dodiachmad</a>`;
+      });
+}
+
 
 function getWeather() {
+   getBackground()
    const location = document.getElementById("search-input").value;
    fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${location.replace(
@@ -54,6 +51,7 @@ function getWeather() {
       })
 }
 
+
 function getQuote() {
    fetch("https://api.quotable.io/random")
       .then((resp) => resp.json())
@@ -65,6 +63,7 @@ function getQuote() {
          document.getElementById("quote").innerText = `The way to get started is to quit talking and begin doing.`
       });
 }
+
 
 function getCryptoData() {
    fetch(
@@ -89,6 +88,7 @@ function getCryptoData() {
             </ul>`;
       })
 }
+
 
 function getCurrentTime() {
    const date = new Date();
