@@ -1,6 +1,7 @@
 document.querySelector("button").addEventListener("click", getWeather);
 
 function getBackground() {
+   getQuote()
    fetch("https://api.unsplash.com/photos/random?client_id=PGR3m4IhJwRziQDAarEDZxFC201BpNQ68y026rYEn-I&orientation=landscape&query=nature")
       .then((resp) => resp.json())
       .then((data) => {
