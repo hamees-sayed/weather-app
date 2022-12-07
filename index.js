@@ -15,12 +15,10 @@ function getBackground() {
       });
 }
 
-
 function getWeather() {
    getBackground()
    const location = document.getElementById("search-input").value;
-   fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${location.replace(
+   fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location.replace(
          " ",
          "+"
       )}&units=metric&appid=16712e942c2fcb053e119f0e6ae2ae55`
@@ -52,7 +50,6 @@ function getWeather() {
       })
 }
 
-
 function getQuote() {
    fetch("https://api.quotable.io/random")
       .then((resp) => resp.json())
@@ -64,7 +61,6 @@ function getQuote() {
          document.getElementById("quote").innerText = `The way to get started is to quit talking and begin doing.`
       });
 }
-
 
 function getCryptoData() {
    fetch(
@@ -89,7 +85,6 @@ function getCryptoData() {
             </ul>`;
       })
 }
-
 
 function getCurrentTime() {
    const date = new Date();
